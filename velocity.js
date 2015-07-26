@@ -407,17 +407,14 @@
 ******************/
 
 ;(function (factory) {
-    /* CommonJS module. */
-    if (typeof module === "object" && typeof module.exports === "object") {
-        module.exports = factory();
-    /* AMD module. */
-    } else if (typeof define === "function" && define.amd) {
-        define(factory);
-    /* Browser globals. */
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery'], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        module.exports = factory(require('jquery'));
     } else {
-        factory();
+        factory(jQuery);
     }
-}(function() {
+}(function ($) {
 return function (global, window, document, undefined) {
 
     /***************
@@ -3856,7 +3853,7 @@ return function (global, window, document, undefined) {
     });
 
     return Velocity;
-}((window.jQuery || window.Zepto || window), window, document);
+}($, window, document);
 }));
 
 /******************
